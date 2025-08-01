@@ -1,6 +1,6 @@
 [project]
-name = "cst_ui"
-version = "0.0.1"
+name = "cst-ui"
+version = "0.0.3"
 description = "A UI package based on Flet for more convenient construction of interface programs."
 readme = "README.md"
 authors = [{ name = "aigcst", email = "aigcst@outlook.com" }]
