@@ -1,13 +1,14 @@
-'''界面基本配置'''
+"""界面基本配置"""
 
-from pathlib import Path
 import logging
 import logging.handlers
+from pathlib import Path
 from typing import Optional
+
 from .constants import RUN_MODE
 
 
-def setup_filesize_logger(log_file: Path, name='cst_ui', run_mode: Optional[RUN_MODE] = None) -> logging.Logger:
+def setup_filesize_logger(log_file: Path, name="cst_ui", run_mode: Optional[RUN_MODE] = None) -> logging.Logger:
     """创建基于日志大小的日志器
 
     Arguments:
@@ -27,7 +28,7 @@ def setup_filesize_logger(log_file: Path, name='cst_ui', run_mode: Optional[RUN_
         # 时间 文件名 文件行号 函数名 日志等级 输出的信息
         # fmt="[%(asctime)s.%(msecs)03d %(filename)s:%(lineno)d:%(funcName)s]:%(levelname)s: %(message)s",
         fmt="%(asctime)s.%(msecs)03d | %(levelname)s | %(filename)s:%(lineno)d | %(message)s",
-        datefmt='%Y-%m-%d %H:%M:%S',
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
 
     if run_mode == RUN_MODE.DEV:
@@ -48,7 +49,7 @@ def setup_filesize_logger(log_file: Path, name='cst_ui', run_mode: Optional[RUN_
 
     # 基于文件大小的handler
     filesize_handler = logging.handlers.RotatingFileHandler(
-        filename=log_file, mode='a', maxBytes=10 * 1024 * 1024, backupCount=10, encoding='utf-8'
+        filename=log_file, mode="a", maxBytes=10 * 1024 * 1024, backupCount=10, encoding="utf-8"
     )
     filesize_handler.setFormatter(formatter)
     my_logger.addHandler(filesize_handler)
@@ -62,11 +63,11 @@ class CFG:
         self.root_dir = Path(__file__).parents[2]
         self.run_mode = RUN_MODE.DEV
         # 输出文件夹：图像效果、日志等
-        self.output_dir = Path(self.root_dir, 'output')
-        self.log_dir = Path(self.root_dir, 'output', 'log')
+        self.output_dir = Path(self.root_dir, "output")
+        self.log_dir = Path(self.root_dir, "output", "log")
         self.log_dir.mkdir(exist_ok=True, parents=True)
-        self.logger = setup_filesize_logger(log_file=Path(self.log_dir, 'ui.log'), run_mode=self.run_mode)
-        self.language = 'zh_CN'
+        self.logger = setup_filesize_logger(log_file=Path(self.log_dir, "ui.log"), run_mode=self.run_mode)
+        self.language = "zh_CN"
         # 简体中文	zh_CN
         # 繁体中文	zh_TW
         # 英语	en_US
@@ -77,12 +78,18 @@ class CFG:
         # 阿拉伯语	ar_KW
 
     def __repr__(self):
-        return f'''
+        return f"""
 - {self.output_dir=}
 - {self.log_dir=}
-'''
+"""
+
+    def get(self, key_name):
+        pass
+
+    def set(self, key_name, value):
+        pass
 
 
 cfg = CFG()
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(cfg)

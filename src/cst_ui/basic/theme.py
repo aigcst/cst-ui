@@ -1,13 +1,14 @@
-'''主题相关配置'''
+"""主题相关配置"""
 
 import flet as ft
-from pathlib import Path
-from enum import Enum, unique
-from typing import Optional, Union, TypedDict, Any, List, Dict, Tuple, Sequence, Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from enum import Enum, unique
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, TypedDict, Union
 
 # --- 2、字体 ---
-FONT_DIR = Path(list(Path(__file__).parents)[1], 'data/fonts').resolve()
+FONT_DIR = Path(list(Path(__file__).parents)[1], "data/fonts").resolve()
 
 
 class Font:
@@ -19,7 +20,7 @@ class Font:
         self.path = path
 
     def __repr__(self):
-        return f'{self.name}, {self.path}'
+        return f"{self.name}, {self.path}"
 
 
 fonts = [
@@ -65,13 +66,15 @@ info_color_style = FeedbackStyle(
 class StyleType(Enum):
     DEFAULT = 0  # 默认灰色
     PRIMARY = 1  # 蓝色，#007bff
+    INFO = 2  # 浅蓝色：#17a2b8
+    SUCCESS = 3  # 绿色：#28a745
+    WARNING = 4  # 黄色：#ffc107
+    ERROR = 5  # 红色：#dc3545
+    # SECONDARY   # 次要：#6c757d
 
-    INFO = 5  # 浅蓝色：#17a2b8
-    SUCCESS = 2  # 绿色：#28a745
-    WARNING = 3  # 黄色：#ffc107
-    ERROR = 4  # 红色：#dc3545
 
-
+# DEBUG
+# CRITICAL
 # 2、尺寸大小
 # small_switch = create_custom_switch(0.5, "小号开关")
 # normal_switch = create_custom_switch(0.8, "正常大小开关")
@@ -126,8 +129,8 @@ class Spacing:
 
 class LayoutType(Enum):
     # 表单的水平、竖直排布
-    HORIZONTAL = 'horizontal'
-    VERTICAL = 'vertical'
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
 
     # xs
     # s
@@ -192,7 +195,7 @@ class Theme:
             blur_radius=10,
             color=ft.Colors.GREY_300,
             offset=ft.Offset(0, 2.5),
-            blur_style=ft.ShadowBlurStyle.SOLID,
+            # blur_style=ft.ShadowBlurStyle.SOLID,
         )
 
         # 9、应用主题
@@ -228,38 +231,7 @@ class Theme:
                 windows=ft.PageTransitionTheme.NONE,
                 linux=ft.PageTransitionTheme.NONE,
             ),
-            # system_overlay_style=ft.SystemOverlayStyle(),
-            # appbar_theme=ft.AppBarTheme(),
-            # badge_theme=ft.BadgeTheme(),
-            # banner_theme=ft.BannerTheme(),
-            # bottom_appbar_theme=ft.BottomAppBarTheme(),
-            # bottom_navigation_bar_theme=ft.BottomNavigationBarTheme(),
-            # bottom_sheet_theme=ft.BottomSheetTheme(),
-            # card_theme=ft.CardTheme(),
-            # checkbox_theme=ft.CheckboxTheme(),
-            # chip_theme=ft.ChipTheme(),
-            # date_picker_theme=ft.DatePickerTheme(),
-            # dialog_theme=ft.DialogTheme(),
-            # divider_theme=ft.DividerTheme(),
-            # expansion_tile_theme=ft.ExpansionTileTheme(),
-            # list_tile_theme=ft.ListTileTheme(),
-            # navigation_bar_theme=ft.NavigationBarTheme(),
-            # navigation_drawer_theme=ft.NavigationDrawerTheme(),
-            # navigation_rail_theme=ft.NavigationRailTheme,
-            # popup_menu_theme=ft.PopupMenuTheme(),
-            # primary_color=self.color.primary,
-            # primary_color_dark=self.color.text_primary,
-            # primary_color_light=self.color.primary,
-            # primary_swatch=ft.Colors.RED,
-            # progress_indicator_theme=ft.ProgressIndicatorTheme(),
             radio_theme=ft.RadioTheme(fill_color=ft.Colors.RED),
-            # search_bar_theme=ft.SearchBarTheme(),
-            # segmented_button_theme=ft.SegmentedButtonTheme(),
-            # slider_theme=ft.SliderTheme(),
-            # snackbar_theme=ft.SnackBarTheme(),
-            # switch_theme=ft.SwitchTheme(),
-            # time_picker_theme=ft.TimePickerTheme(),
-            # tooltip_theme=ft.TooltipTheme(),
         )
 
     def __getitem__(self, key: StyleType) -> FeedbackStyle:
