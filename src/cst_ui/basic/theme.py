@@ -1,11 +1,12 @@
 """主题相关配置"""
 
-import flet as ft
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from enum import Enum, unique
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, TypedDict, Union
+
+import flet as ft
 
 # --- 2、字体 ---
 FONT_DIR = Path(list(Path(__file__).parents)[1], "data/fonts").resolve()
@@ -23,10 +24,7 @@ class Font:
         return f"{self.name}, {self.path}"
 
 
-fonts = [
-    Font(str(Path(FONT_DIR, "AlibabaPuHuiTi-3-55-Regular.otf"))),
-    Font(str(Path(FONT_DIR, "Consolas.ttf"))),
-]
+fonts = [Font(str(Path(FONT_DIR, "AlibabaPuHuiTi-3-55-Regular.otf"))), Font(str(Path(FONT_DIR, "Consolas.ttf")))]
 
 FONTS = dict(zip([font.name for font in fonts], [font.path for font in fonts]))
 
@@ -212,15 +210,12 @@ class Theme:
                 cross_axis_margin=-10,
                 track_visibility=False,
                 thumb_visibility=False,
-                track_color={
-                    ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
-                },
+                track_color={ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT},
                 thumb_color={
                     ft.ControlState.HOVERED: ft.Colors.TRANSPARENT,
                     ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
                 },
             ),
-            tabs_theme=ft.TabsTheme(),
             font_family="AlibabaPuHuiTi-3-55-Regular",  # 所有UI元素的基准字体
             use_material3=True,  # use material 2: this setting is mainly for the app-bar's elevation
             # visual_density=ft.ThemeVisualDensity.ADAPTIVEPLATFORMDENSITY,
