@@ -74,6 +74,7 @@ class InputColors:
         )
 
 
+@dataclass
 class Input(ft.TextField):
     """
     A text field lets the user enter text, either with hardware keyboard or with an
@@ -475,6 +476,7 @@ class Input(ft.TextField):
         self.value = e.control.value
 
 
+@dataclass
 class NumberInput(Input):
     value: int | float | Decimal | str = 0
     min_value = -math.inf
@@ -585,7 +587,7 @@ class NumberInput(Input):
         self.update()
 
 
-def get_ui_view():
+def demo():
     def text_submit(e):
         if e.control.value != "1":
             e.control.error_text = "不是1"
@@ -666,7 +668,7 @@ def get_ui_view():
         controls=[
             NumberInput(
                 # "年龄",
-                # value=18, # TODO
+                value=18,
                 height=500,
             ),
             FormField(label="帐号", label_width=80, form_content=Input()),
@@ -738,10 +740,7 @@ def get_ui_view():
 
 
 def main(page: ft.Page):
-    page.title = "Test"
-    page.scroll = ft.ScrollMode.ALWAYS
-    # page.theme_mode = "dark"
-    page.add(get_ui_view())
+    page.add(demo())
     page.update()
 
 

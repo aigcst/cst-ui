@@ -49,7 +49,11 @@ class Audio(ft.Container):
 
     def seek(self, seconds):
         new_position = max(
-            0, min(self.audio_state["duration"], self.audio_state["current_position"] + seconds)
+            0,
+            min(
+                self.audio_state["duration"],
+                self.audio_state["current_position"] + seconds,
+            ),
         )  # Ensure within bounds
         self.audio.position = new_position * 1000  # Set position in milliseconds
         self.update_duration(new_position)
@@ -120,18 +124,24 @@ class Audio(ft.Container):
         self.play_button = ft.TextButton(
             on_click=self.handle_play_or_pause,
             content=ft.Icon(name=ft.Icons.PLAY_ARROW_ROUNDED),
-            style=ft.ButtonStyle(color="#ffffff", bgcolor="#1f5eff", shape=ft.CircleBorder(), padding=15),
+            style=ft.ButtonStyle(
+                color="#ffffff", bgcolor="#1f5eff", shape=ft.CircleBorder(), padding=15
+            ),
         )
         self.content = ft.Row(
             [
                 ft.Row(
                     [
                         ft.IconButton(
-                            icon=ft.Icons.REPLAY_10_ROUNDED, icon_color="#ffffff,0.5", on_click=lambda _: self.seek(-10)
+                            icon=ft.Icons.REPLAY_10_ROUNDED,
+                            icon_color="#ffffff,0.5",
+                            on_click=lambda _: self.seek(-10),
                         ),
                         self.play_button,
                         ft.IconButton(
-                            icon=ft.Icons.FORWARD_10_ROUNDED, icon_color="#ffffff,0.5", on_click=lambda _: self.seek(10)
+                            icon=ft.Icons.FORWARD_10_ROUNDED,
+                            icon_color="#ffffff,0.5",
+                            on_click=lambda _: self.seek(10),
                         ),
                     ],
                     spacing=0,
@@ -148,14 +158,14 @@ class Audio(ft.Container):
         self.border_radius = 14
 
 
-def get_ui_view():
+def demo():
     return ft.Row(controls=[Audio(url=r"data\野蜂飞舞.mp3")])
 
 
 def main(page: ft.Page):
     page.title = "Test"
     # page.theme_mode = "dark"
-    page.add(get_ui_view())
+    page.add(demo())
     page.update()
 
 
