@@ -1,10 +1,9 @@
 """主题相关配置"""
 
-from collections.abc import Callable, Sequence
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum, unique
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, TypedDict, Union
 
 import flet as ft
 
@@ -24,7 +23,10 @@ class Font:
         return f"{self.name}, {self.path}"
 
 
-fonts = [Font(str(Path(FONT_DIR, "AlibabaPuHuiTi-3-55-Regular.otf"))), Font(str(Path(FONT_DIR, "Consolas.ttf")))]
+fonts = [
+    Font(str(Path(FONT_DIR, "AlibabaPuHuiTi-3-55-Regular.otf"))),
+    Font(str(Path(FONT_DIR, "Consolas.ttf"))),
+]
 
 FONTS = dict(zip([font.name for font in fonts], [font.path for font in fonts]))
 
@@ -41,10 +43,16 @@ class FeedbackStyle:
 
 
 primary_color_style = FeedbackStyle(
-    icon=ft.Icons.MESSAGE, color=ft.Colors.BLUE, color_light=ft.Colors.BLUE_300, color_accent=ft.Colors.BLUE_800
+    icon=ft.Icons.MESSAGE,
+    color=ft.Colors.BLUE,
+    color_light=ft.Colors.BLUE_300,
+    color_accent=ft.Colors.BLUE_800,
 )
 success_color_style = FeedbackStyle(
-    icon=ft.Icons.DONE, color=ft.Colors.GREEN, color_light=ft.Colors.GREEN_300, color_accent=ft.Colors.GREEN_800
+    icon=ft.Icons.DONE,
+    color=ft.Colors.GREEN,
+    color_light=ft.Colors.GREEN_300,
+    color_accent=ft.Colors.GREEN_800,
 )
 warning_color_style = FeedbackStyle(
     icon=ft.Icons.WARNING_ROUNDED,
@@ -53,10 +61,16 @@ warning_color_style = FeedbackStyle(
     color_accent=ft.Colors.AMBER_800,
 )
 error_color_style = FeedbackStyle(
-    icon=ft.Icons.CLOSE, color=ft.Colors.RED, color_light=ft.Colors.RED_300, color_accent=ft.Colors.RED_800
+    icon=ft.Icons.CLOSE,
+    color=ft.Colors.RED,
+    color_light=ft.Colors.RED_300,
+    color_accent=ft.Colors.RED_800,
 )
 info_color_style = FeedbackStyle(
-    icon=ft.Icons.CLOSE, color=ft.Colors.GREY, color_light=ft.Colors.GREY_300, color_accent=ft.Colors.GREY_800
+    icon=ft.Icons.CLOSE,
+    color=ft.Colors.GREY,
+    color_light=ft.Colors.GREY_300,
+    color_accent=ft.Colors.GREY_800,
 )
 
 
@@ -155,6 +169,18 @@ class Color:
     success = success_color_style.color
     warning = warning_color_style.color
     error = error_color_style.color
+
+    primary_light = primary_color_style.color_light
+    info_light = info_color_style.color_light
+    success_light = success_color_style.color_light
+    warning_light = warning_color_style.color_light
+    error_light = error_color_style.color_light
+
+    primary_accent = primary_color_style.color_accent
+    info_accent = info_color_style.color_accent
+    success_accent = success_color_style.color_accent
+    warning_accent = warning_color_style.color_accent
+    error_accent = error_color_style.color_accent
 
 
 class Theme:
