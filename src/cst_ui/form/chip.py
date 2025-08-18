@@ -25,7 +25,7 @@ from cst_ui.basic.theme import theme
 @dataclass
 class Chip(ft.Chip):
     text: str = ""
-    label: StrOrControl = ft.Text(value="")  # 添加默认
+    label: StrOrControl = ft.Text(value="")  # 添加默认值
     leading: Optional[Control] = None
     selected: bool = False
     selected_color: Optional[ColorValue] = None

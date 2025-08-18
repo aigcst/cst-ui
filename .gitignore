@@ -13,3 +13,9 @@ wheels/
 
 *.emmx
 *.eddx
+
+*.mp3
+*.jpg
+*.ttf
+*.otf
+*.yaml
