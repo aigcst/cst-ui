@@ -1,5 +1,3 @@
-import time
-
 import flet as ft
 
 
@@ -12,19 +10,19 @@ class Column(ft.ListView):
         return super().did_mount()
 
 
-def get_ui_view():
-    with open(__file__, "r", encoding="utf-8") as f:
-        file_text = f.read()
+def demo(page: ft.Page):
     from cst_ui.display.text import Code
 
+    with open(__file__, "r", encoding="utf-8") as f:
+        file_text = f.read()
     return ft.Column(controls=[Code(file_text), Column()])
 
 
 def main(page: ft.Page):
     page.scroll = ft.ScrollMode.ADAPTIVE
-    page.add(get_ui_view())
-    page.update()
+
+    page.add(demo(page=page))
 
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
