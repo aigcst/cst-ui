@@ -46,7 +46,7 @@ class DropDownColors:
 
 @dataclass
 class SelectOption(Option):
-    text: str = ""  # 不可为None
+    text: str | int | float = ""  # 不可为None
 
     def __post_init__(self, ref: ft.Ref[Any] | None):
         # self.selected = True
@@ -81,11 +81,7 @@ class SelectBox(ft.DropdownM2):
         self.text_style = ft.TextStyle(size=TEXT_SIZE, color=ft.Colors.BLACK)
         self.content_padding = ft.padding.only(left=PADDING)
 
-        self.colors = (
-            DropDownColors.dark()
-            if self.theme_mode == ft.ThemeMode.DARK
-            else DropDownColors.light()
-        )
+        self.colors = DropDownColors.dark() if self.theme_mode == ft.ThemeMode.DARK else DropDownColors.light()
         self.border_color = ft.Colors.GREY_400
         self.bgcolor = ft.Colors.WHITE
         self.border_width = 1

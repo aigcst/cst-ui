@@ -1,6 +1,6 @@
-import asyncio
 import time
-from typing import Optional
+from dataclasses import dataclass
+from typing import Any
 
 import flet as ft
 
@@ -12,19 +12,26 @@ import flet as ft
 #         self.theme_style = self.theme_style or ft.TextThemeStyle.BODY_MEDIUM
 
 
+@dataclass
 class HeaderBase(ft.Column):
-    def __init__(
-        self, value: str = "占位", with_divider: bool = False, divider_thickness=1, divider_height=1, **kwargs
-    ):
-        super().__init__(**kwargs)
-        self.v_text = ft.Text(value)
-        if with_divider:
+    value: str = "占位"
+    with_divider: bool = False
+    divider_thickness: int = 1
+    divider_height: int = 1
+    v_text = ft.Text(value)
+
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        if self.with_divider:
             # if hasattr(ft.Colors, self.divider.upper()):
             #     divider_color = self.divider
             # else:
             #     divider_color = theme.color.divider
             self.divider_color = ft.Colors.BLACK
-            self.v_divider = ft.Divider(thickness=divider_thickness, height=divider_height, color=self.divider_color)
+            self.v_divider = ft.Divider(
+                thickness=self.divider_thickness,
+                height=self.divider_height,
+                color=self.divider_color,
+            )
             self.controls = [self.v_text, self.v_divider]
             self.spacing = 0
             self.alignment = ft.MainAxisAlignment.CENTER
@@ -34,73 +41,93 @@ class HeaderBase(ft.Column):
         # self.height = 100
         self.padding = 0
         self.alignment = ft.MainAxisAlignment.START
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Title(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.DISPLAY_MEDIUM
         self.v_text.weight = self.v_text.weight or ft.FontWeight.BOLD
+        return super().__post_init__(ref)
 
 
+@dataclass
 class SubTitle(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.DISPLAY_SMALL
         self.v_text.weight = self.v_text.weight or ft.FontWeight.BOLD
         # self.horizontal_alignment=ft.
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Header_1(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.HEADLINE_LARGE
         self.v_text.weight = self.v_text.weight or ft.FontWeight.W_600
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Header_2(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.HEADLINE_MEDIUM
         self.v_text.weight = self.v_text.weight or ft.FontWeight.W_500
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Header_3(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.HEADLINE_SMALL
         self.v_text.weight = self.v_text.weight or ft.FontWeight.W_500
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Header_4(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.TITLE_LARGE
         self.v_text.weight = self.v_text.weight or ft.FontWeight.W_500
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Header_5(HeaderBase):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.v_text = ft.Text(self.value)
         self.v_text.theme_style = self.v_text.theme_style or ft.TextThemeStyle.TITLE_MEDIUM
         self.v_text.weight = self.v_text.weight or ft.FontWeight.W_500
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Quote(ft.Text):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
         self.bgcolor = ft.Colors.GREY
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Link(ft.Text):
-    def __init__(self, link: str | None = None, **kwargs):
-        super().__init__(**kwargs)
+    link: str | None = None
+
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Caption(ft.Text):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __post_init__(self, ref: ft.Ref[Any] | None):
         self.bgcolor = ft.Colors.GREY
+        return super().__post_init__(ref)
 
 
 Header = Header_1
@@ -115,29 +142,35 @@ MARKDOWN_STYLE = ft.MarkdownStyleSheet(
 )
 
 
+@dataclass
 class Markdown(ft.Markdown):
-    def __init__(self, value: str = "", **kwargs):
-        super().__init__(value=value, **kwargs)
+    value: str = ""
+
+    def __post_init__(self, ref: ft.Ref[Any] | None):
         self.selectable = True
         self.extension_set = ft.MarkdownExtensionSet.GITHUB_WEB
         self.code_theme = ft.MarkdownCodeTheme.MONOKAI
         # BUG: 需要一个空的配置值，不然关键词会是黑色，看不清
         self.code_style_sheet = MARKDOWN_STYLE
+        return super().__post_init__(ref)
 
 
+@dataclass
 class Json(ft.Markdown):
     # todo：树状展示，可复制
-    def __init__(self, value, language="python", *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    value: str = "占位"
+    language: str = "python"
 
 
+@dataclass
 class Code(ft.Row):
-    def __init__(self, value, language="python"):
-        #
-        self.value = f"""```{language}
-{value}
+    value: str = "占位"
+    language: str = "python"
+
+    def __post_init__(self, ref: ft.Ref[Any] | None):
+        self.value = f"""```{self.language}
+{self.value}
 ```"""
-        self.language = language
         self._hovered: bool | None = None
 
         self.copy_box = ft.Container(
@@ -160,8 +193,6 @@ class Code(ft.Row):
             on_click=lambda e: self.get_copy_box_content(e),
         )
 
-        super().__init__()
-
         self.alignment = ft.MainAxisAlignment.START
         self.vertical_alignment = ft.CrossAxisAlignment.CENTER
         self.controls = [
@@ -174,6 +205,7 @@ class Code(ft.Row):
                 content=ft.Stack(controls=[Markdown(value=self.value), self.copy_box]),
             )
         ]
+        return super().__post_init__(ref)
 
     def get_copy_box_content(self, e):
         # self.value = self.value.replace("`", "")
@@ -241,7 +273,7 @@ def main(page: ft.Page):
 # Markdown Example
 Markdown allows you to easily include formatted text, images, and even formatted Dart code in your app.
 
-name: `chen`
+name: `li`
 ## Titles
 
 Setext-style
