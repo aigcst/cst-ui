@@ -1,22 +1,20 @@
+import traceback
 from inspect import iscoroutinefunction
 from typing import Any, Callable, Dict, List, TypeVar
 
 from flet import (
+    Control,
     ControlEvent,
     KeyboardEvent,
     Page,
     Text,
     View,
+    alignment,
 )
 from flet.canvas import Canvas
-from flet import Control
-from flet import alignment
-
 from flet.controls.session_storage import SessionStorage
-import traceback
 
 # T = TypeVar("T")
-from flet import Page
 
 
 class SessionStorageEdit(SessionStorage):
@@ -37,11 +35,11 @@ class SessionStorageEdit(SessionStorage):
         super().remove(key)
 
     def __str__(self) -> str:
-        show_str = ''
+        show_str = ""
         for _key, _value in self.__dict__.items():
-            show_str = show_str + '{_key}={_value}\n'
-        if show_str == '':
-            show_str = 'Share is Empty'
+            show_str = show_str + "{_key}={_value}\n"
+        if show_str == "":
+            show_str = "Share is Empty"
         return show_str
 
 
@@ -217,7 +215,7 @@ class ResponsiveControl(Canvas):
         content=ft.Container(
             content=ft.Text("on_resize"),
             bgcolor=ft.Colors.RED,
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment.CENTER,
             height=100,
         ),
         expand=1,
