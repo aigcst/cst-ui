@@ -53,7 +53,7 @@ unfixable = []
 
 [tool.ruff.format]
 # # 格式化风格（与Black兼容）
-# quote-style = "single"           #字符使用单引号
+quote-style = "single"           #字符使用单引号
 indent-style = "space"           #是否使用空格或制表符进行缩进，制表符-tab、空格space
 docstring-code-format = true     #是否在注释中格式化代码片段
 # skip-magic-trailing-comma = true #使用现有的尾随逗号作为短行应保持独立的指示
